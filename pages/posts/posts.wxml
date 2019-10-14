@@ -10,35 +10,23 @@
       <image src="/images/iqiyi.png"></image>
     </swiper-item>
   </swiper>
-  <view class="post-container">
-    <view class="post-author-date">
-      <image class="post-author" src="{{img.avatar}}"></image>
-      <text class="post-date">{{date}}</text>
+  <!-- wx:for-item 不定义的话默认为item，wx:for-index不定义的话默认为index -->
+  <block wx:for="{{posts_content}}">
+    <view class="post-container">
+      <view class="post-author-date">
+        <image class="post-author" src="{{item.avatar}}"></image>
+        <text class="post-date">{{item.date}}</text>
+      </view>
+      <text class="post-title">{{item.title}}</text>
+      <image class="post-image" src="{{item.background}}"></image>
+      <text class="post-content">{{item.content}}</text>
+      <view class="post-like">
+        <image class="post-like-image" src="/images/icon/chat.png"></image>
+        <text class="post-like-font">{{item.reading}}</text>
+        <image class="post-like-image" src="/images/icon/view.png"></image>
+        <text class="post-like-font">{{item.collection}}</text>
+      </view>
     </view>
-    <text class="post-title">{{title}}</text>
-    <image class="post-image" src="{{img.background}}"></image>
-    <text class="post-content">{{content}}</text>
-    <view class="post-like">
-      <image class="post-like-image" src="/images/icon/chat.png"></image>
-      <text class="post-like-font">{{reading}}</text>
-      <image class="post-like-image" src="/images/icon/view.png"></image>
-      <text class="post-like-font">{{collection}}</text>
-    </view>
-  </view>
+  </block>
 
-  <view class="post-container">
-    <view class="post-author-date">
-      <image class="post-author" src="/images/avatar.png"></image>
-      <text class="post-date">Oct 14 2019</text>
-    </view>
-    <text class="post-title">比利·林恩的中场故事</text>
-    <image class="post-image" src="/images/post/bl.png"></image>
-    <text class="post-content">李安是一位绝不会重复自己的导演，本片将极富原创性李安众所瞩目的新片《比利林恩漫长的中场休息》，正式更名《半场无战事》。</text>
-    <view class="post-like">
-      <image class="post-like-image" src="/images/icon/chat.png"></image>
-      <text class="post-like-font">62</text>
-      <image class="post-like-image" src="/images/icon/view.png"></image>
-      <text class="post-like-font">92</text>
-    </view>
-  </view>
 </view>
