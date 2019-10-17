@@ -11,7 +11,7 @@
     </swiper-item>
   </swiper>
   <!-- wx:for-item 不定义的话默认为item，wx:for-index不定义的话默认为index -->
-  <block wx:for="{{posts_content}}">
+  <block wx:for="{{posts_content}}" wx:key="1">
     <view class="post-container">
       <view class="post-author-date">
         <image class="post-author" src="{{item.avatar}}"></image>
