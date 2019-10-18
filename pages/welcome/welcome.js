@@ -2,20 +2,13 @@
 Page({
   onTap: function() {
     // 可以back，执行onHide
-    wx.navigateTo({
-      url: "../posts/posts"
-    });
-    // 不可以back，执行onUnload
-    // wx.redirectTo({
+    // wx.navigateTo({
     //   url: "../posts/posts"
     // });
-  },
+    // 不可以back，执行onUnload
+    wx.redirectTo({
+      url: "../posts/posts"
+    });
+  }
   
-  onHide: function () {
-    console.log("Welcome page is hide");
-  },
-
-  onUnload: function () {
-    console.log("Welcome page is unload");
-  },
 })
