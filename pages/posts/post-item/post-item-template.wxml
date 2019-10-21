@@ -1,0 +1,20 @@
+<!-- wx:for 只能在一个文件被重复使用，而template 可以在多个文件被重复使用 -->
+<!-- 小程序的template只能做到模板化编程，而不是模块化编程，它不能包含js文件以处理该template的业务逻辑，比如这里关于post-item-template的业务就只能写在引用页面的脚本文件posts.js文件中 -->
+<!-- 如果还想将js文件抽离复用，可以创建自定义组件，类似于页面，一个自定义组件由 json wxml wxss js 4个文件组成。使用template还是自定义组件，根据情况决定，一般在页面较少，逻辑较简单的情况下，使用template就够了。 -->
+<template name="postItem">
+  <view class="post-container">
+    <view class="post-author-date">
+      <image class="post-author" src="{{avatar}}"></image>
+      <text class="post-date">{{date}}</text>
+    </view>
+    <text class="post-title">{{title}}</text>
+    <image class="post-image" src="{{imgSrc}}"></image>
+    <text class="post-content">{{content}}</text>
+    <view class="post-like">
+      <image class="post-like-image" src="/images/icon/chat.png"></image>
+      <text class="post-like-font">{{reading}}</text>
+      <image class="post-like-image" src="/images/icon/view.png"></image>
+      <text class="post-like-font">{{collection}}</text>
+    </view>
+  </view>
+</template>
