@@ -11,14 +11,14 @@
     </swiper-item>
   </swiper>
   <!-- wx:for-item 不定义的话默认为item，wx:for-index不定义的话默认为index -->
-  <block wx:for="{{posts_content}}" wx:key="1">
+  <block wx:for="{{posts_key}}" wx:key="1">
     <view class="post-container">
       <view class="post-author-date">
         <image class="post-author" src="{{item.avatar}}"></image>
         <text class="post-date">{{item.date}}</text>
       </view>
       <text class="post-title">{{item.title}}</text>
-      <image class="post-image" src="{{item.background}}"></image>
+      <image class="post-image" src="{{item.imgSrc}}"></image>
       <text class="post-content">{{item.content}}</text>
       <view class="post-like">
         <image class="post-like-image" src="/images/icon/chat.png"></image>
