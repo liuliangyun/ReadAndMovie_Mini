@@ -15,7 +15,9 @@
   </swiper>
   <!-- wx:for-item 不定义的话默认为item，wx:for-index不定义的话默认为index -->
   <block wx:for="{{posts_key}}" wx:for-item="item" wx:key="1">
-    <template is="postItem" data="{{...item}}" />
+    <view catchtap="onPostTap" data-postid="{{item.postId}}" data-post-name="name">
+      <template is="postItem" data="{{...item}}" />
+    </view>
   </block>
 
 </view>
