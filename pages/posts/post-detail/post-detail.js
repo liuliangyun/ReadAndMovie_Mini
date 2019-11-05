@@ -37,6 +37,29 @@ Page({
     // 收藏变成未收藏，未收藏变成收藏
     postColected = !postColected;
     postsCollected[this.data.currentPostId] = postColected;
+    this.showToast(postsCollected, postColected);
+    // this.showModal(postsCollected, postColected);
+  },
+
+  showModal: function (postsCollected, postColected) {
+    var that = this;
+    wx.showModal({
+      title: '收藏',
+      content: postColected ? '收藏该文章' : '取消收藏该文章',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: "#333",
+      confirmText: '确定',
+      confirmColor: "#405f80",
+      success(res) {
+        if(res.confirm) {
+          that.showToast(postsCollected, postColected);
+        }
+      }
+    })
+  },
+
+  showToast: function (postsCollected, postColected) {
     // 更新文章是否收藏的缓存
     wx.setStorageSync("posts_collected", postsCollected);
     // 更新数据绑定变量，从而实现切换图片
