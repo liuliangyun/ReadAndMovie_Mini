@@ -43,5 +43,11 @@ Page({
     this.setData({
       collected: postColected
     });
+
+    wx.showToast({
+      title: postColected ? '收藏成功' : '取消成功',
+      duration: 1000,
+      icon: "success"
+    })
   }
 })
