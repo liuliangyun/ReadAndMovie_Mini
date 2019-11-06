@@ -72,5 +72,28 @@ Page({
       duration: 1000,
       icon: "success"
     })
+  },
+
+  onShareTap: function(event) {
+    var itemList = [
+      '分享给微信好友',
+      '分享到朋友圈',
+      '分享到QQ',
+      '分享到微博'
+    ];
+    wx.showActionSheet({
+      itemList: itemList,
+      itemColor: '#405f80',
+      success: function(res) {
+        // res.tapIndex 表示用户点击了itemList的序号，从0开始
+        wx.showModal({
+          title: '分享',
+          content: '微信小程序现在无法实现' + itemList[res.tapIndex],
+          showCancel: false,
+          confirmText: '我知道了',
+          confirmColor: '#405f80'
+        })
+      }
+    })
   }
 })
