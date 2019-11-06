@@ -32,6 +32,11 @@ Page({
   },
 
   onCollectionTap: function(event) {
+    this.getPostsCollectedSync();
+    // this.getPostsCollectedASyn();
+  },
+
+  getPostsCollectedSync: function() {
     var postsCollected = wx.getStorageSync("posts_collected");
     var postColected = postsCollected[this.data.currentPostId];
     // 收藏变成未收藏，未收藏变成收藏
@@ -39,6 +44,22 @@ Page({
     postsCollected[this.data.currentPostId] = postColected;
     this.showToast(postsCollected, postColected);
     // this.showModal(postsCollected, postColected);
+  },
+
+  getPostsCollectedASyn: function() {
+    var that = this;
+    wx.getStorage({
+      key: "posts_collected",
+      success(res) {
+        var postsCollected = res.data;
+        var postColected = postsCollected[that.data.currentPostId];
+        // 收藏变成未收藏，未收藏变成收藏
+        postColected = !postColected;
+        postsCollected[that.data.currentPostId] = postColected;
+        that.showToast(postsCollected, postColected);
+        // that.showModal(postsCollected, postColected);
+      }
+    })
   },
 
   showModal: function (postsCollected, postColected) {
