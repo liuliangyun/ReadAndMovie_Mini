@@ -1,10 +1,15 @@
 // 脚本文件只能用相对路径引入
-var postsData = require('../../../data/posts-data.js')
+var postsData = require('../../../data/posts-data.js');
+var app = getApp();
 
 Page({
   data: {
-    
+    isPlayingMusic: false,
+    currentPostId: undefined,
+    postData: {},
+    collected: false
   },
+
   onLoad: function(option) {
     var postId = option.id;
     this.setData({
@@ -29,6 +34,32 @@ Page({
       postsCollected[postId] = false;
       wx.setStorageSync("posts_collected", postsCollected);
     }
+
+    if (app.globalData.g_isPlayingMusic && app.globalData.g_currentMusicPostId === postId) {
+      this.setData({
+        isPlayingMusic: true
+      });
+    }
+    this.setMusicMonitor();   
+  },
+
+  setMusicMonitor: function() {
+    var that = this;
+    wx.onBackgroundAudioPlay(function () {
+      that.setData({
+        isPlayingMusic: true
+      });
+      app.globalData.g_isPlayingMusic = true;
+      app.globalData.g_currentMusicPostId = that.data.currentPostId;
+    });
+
+    wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlayingMusic: false
+      });
+      app.globalData.g_isPlayingMusic = false;
+      app.globalData.g_currentMusicPostId = null;
+    }); 
   },
 
   onCollectionTap: function(event) {
@@ -116,5 +147,25 @@ Page({
         })
       }
     })
+  },
+
+  onMusicTap: function(event) {
+    var isPlayingMusic = this.data.isPlayingMusic;
+    var postData = this.data.postData;
+    if (isPlayingMusic) {
+      wx.pauseBackgroundAudio();
+      this.setData({
+        isPlayingMusic: false
+      });
+    } else {
+      wx.playBackgroundAudio({
+        dataUrl: postData.music.url,
+        title: postData.music.title,
+        coverImgUrl: postData.music.coverImg
+      })
+      this.setData({
+        isPlayingMusic: true
+      });
+    }
   }
 })
