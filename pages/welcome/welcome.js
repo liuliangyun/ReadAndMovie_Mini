@@ -6,9 +6,14 @@ Page({
     //   url: "../posts/posts"
     // });
     // 不可以back，执行onUnload
-    wx.redirectTo({
-      url: "../posts/posts"
-    });
+    // wx.redirectTo({
+    //   url: "../posts/posts"
+    // });
+
+    // 跳转到带tabBar的页面时，应使用switchTab路由跳转方法
+    wx.switchTab({
+      url: '../posts/posts',
+    })
   }
   
 })
