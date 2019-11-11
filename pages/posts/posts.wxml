@@ -2,15 +2,18 @@
 <!-- <import src="post-item/post-item-template.wxml" /> -->
 <import src="/pages/posts/post-item/post-item-template.wxml" />
 <view>
-  <swiper indicator-dots="true" autoplay="true" interval="5000">
+  <swiper catchtap="onSwiperTap" indicator-dots="true" autoplay="true" interval="5000">
     <swiper-item>
-      <image src="/images/wx.png"></image>
+      <!-- bindtap 不阻止冒泡事件，catchtap阻止冒泡事件继续向上冒泡 -->
+      <!-- <image bindtap="onSwiperItemTap" src="/images/wx.png" data-postid="3"></image> -->
+      <!-- <image catchtap="onSwiperItemTap" src="/images/wx.png" data-postid="3"></image> -->
+      <image src="/images/wx.png" data-postid="3"></image>
     </swiper-item>
     <swiper-item>
-      <image src="/images/vr.png"></image>
+      <image src="/images/vr.png" data-postid="4"></image>
     </swiper-item>
     <swiper-item>
-      <image src="/images/iqiyi.png"></image>
+      <image src="/images/iqiyi.png" data-postid="5"></image>
     </swiper-item>
   </swiper>
   <!-- wx:for-item 不定义的话默认为item，wx:for-index不定义的话默认为index -->
