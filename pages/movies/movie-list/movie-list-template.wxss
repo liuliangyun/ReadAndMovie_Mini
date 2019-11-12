@@ -1,1 +1,46 @@
 @import "../movie/movie-template.wxss";
+
+.movie-list-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.inner-container {
+  margin: 0 auto 20rpx;
+}
+
+.movie-head {
+  padding: 30rpx 20rpx 22rpx;
+  /* 使用弹性盒子模型的两端分布加垂直居中，代替了使用float + verticle-align 的实现方法 */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slogan {
+  font-size: 24rpx;
+}
+
+.more {
+  /* float: right; */
+}
+
+.more-text {
+  color: #1f4ba5;
+  margin-right: 10rpx;
+  /* more-head 用了弹性盒子模型以后，vertical-align属性就失效了 */
+  /* vertical-align: middle; */
+}
+
+.more-img {
+  width: 9rpx;
+  height: 16rpx;
+  /* vertical-align: middle; */
+}
+
+.movies-container {
+  display: flex;
+  flex-direction: row;
+}
