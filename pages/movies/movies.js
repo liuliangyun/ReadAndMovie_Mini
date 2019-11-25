@@ -8,16 +8,17 @@ Page({
   },
 
   onLoad: function() {
-    var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters";
-    var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon";
-    var top250Url = app.globalData.doubanBase + "/v2/movie/top250";
+    var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters" + "?start=0&count=3";
+    var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" + "?start=0&count=3";
+    var top250Url = app.globalData.doubanBase + "/v2/movie/top250" + "?start=0&count=3";
 
-    this.getMovieListData(inTheatersUrl);
-    this.getMovieListData(comingSoonUrl);
-    this.getMovieListData(top250Url);
+    this.getMovieListData(inTheatersUrl, "inTheaters");
+    this.getMovieListData(comingSoonUrl, "comingSoon");
+    this.getMovieListData(top250Url, "top250");
   },
   
-  getMovieListData: function(url) {
+  getMovieListData: function(url, settedKey) {
+    var that = this;
     wx.request({
       url: url,
       data: {},
@@ -28,13 +29,36 @@ Page({
       },
       success: (res) => {
         console.log("success");
-        console.log(res);
+        that.processDoubanData(res.data, settedKey);
       },
       fail: (error) => {
         console.log("failed");
-        console.log(error);
       }
     })
+  },
+
+  processDoubanData: function(moviesDouban, settedKey) {
+    var movies = [];
+    for(var idx in moviesDouban.subjects) {
+      var subject = moviesDouban.subjects[idx];
+      var title = subject.title;
+      if(title >= 6) {
+        title = title.substring(0, 6) + "...";
+      }
+      var movie = {
+        title: title,
+        average: subject.rating.average,
+        coverageUrl: subject.images.large,
+        moviesId: subject.id
+      }
+      movies.push(movie);
+    }
+    // 这里直接使用this，无需使用that，因为这里的上下文环境中可以得知this就是success回调中用来指代this的that
+    var tempData = {};
+    tempData[settedKey] = {
+      movies: movies
+    };
+    this.setData(tempData);
   }
 
 })
