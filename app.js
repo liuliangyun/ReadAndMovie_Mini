@@ -2,7 +2,9 @@ App({
 
   globalData: {
     g_isPlayingMusic: false,
-    g_currentMusicPostId: null
+    g_currentMusicPostId: null,
+    // 直接使用豆瓣api会报403错误，解决方法是使用代理，将豆瓣API地址换成 https://douban.uieee.com
+    doubanBase: "https://douban.uieee.com"
   },
 
   /**
