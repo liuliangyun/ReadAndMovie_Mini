@@ -15,12 +15,12 @@ Page({
     var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" + "?start=0&count=3";
     var top250Url = app.globalData.doubanBase + "/v2/movie/top250" + "?start=0&count=3";
 
-    this.getMovieListData(inTheatersUrl, "inTheaters");
-    this.getMovieListData(comingSoonUrl, "comingSoon");
-    this.getMovieListData(top250Url, "top250");
+    this.getMovieListData(inTheatersUrl, "inTheaters", "正在热映");
+    this.getMovieListData(comingSoonUrl, "comingSoon", "即将上映");
+    this.getMovieListData(top250Url, "top250", "豆瓣Top250");
   },
   
-  getMovieListData: function(url, settedKey) {
+  getMovieListData: function(url, settedKey, categoryTitle) {
     var that = this;
     wx.request({
       url: url,
@@ -32,7 +32,7 @@ Page({
       },
       success: (res) => {
         console.log("success");
-        that.processDoubanData(res.data, settedKey);
+        that.processDoubanData(res.data, settedKey, categoryTitle);
       },
       fail: (error) => {
         console.log("failed");
@@ -40,7 +40,7 @@ Page({
     })
   },
 
-  processDoubanData: function(moviesDouban, settedKey) {
+  processDoubanData: function(moviesDouban, settedKey, categoryTitle) {
     var movies = [];
     for(var idx in moviesDouban.subjects) {
       var subject = moviesDouban.subjects[idx];
@@ -60,6 +60,7 @@ Page({
     // 这里直接使用this，无需使用that，因为这里的上下文环境中可以得知this就是success回调中用来指代this的that
     var tempData = {};
     tempData[settedKey] = {
+      categoryTitle: categoryTitle,
       movies: movies
     };
     this.setData(tempData);
