@@ -1,7 +1,10 @@
+var util = require("../../utils/util");
 var app = getApp();
 Page({
 
   data: {
+    // 这里必须定义这三个空对象，因为getMovieListData为异步执行的方法
+    // 不定义的话，有可能data里没有值，页面中使用数据绑定的地方会出错
     inTheaters: {},
     comingSoon: {},
     top250: {},
@@ -47,6 +50,7 @@ Page({
       }
       var movie = {
         title: title,
+        stars: util.convertStarsNumberToArray(subject.rating.stars),
         average: subject.rating.average,
         coverageUrl: subject.images.large,
         moviesId: subject.id
