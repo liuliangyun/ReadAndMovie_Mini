@@ -8,6 +8,10 @@ Page({
     inTheaters: {},
     comingSoon: {},
     top250: {},
+
+    searchResult: {},
+    searchPanelShow: false,
+    containerShow: true
   },
 
   onLoad: function() {
@@ -18,6 +22,27 @@ Page({
     this.getMovieListData(inTheatersUrl, "inTheaters", "正在热映");
     this.getMovieListData(comingSoonUrl, "comingSoon", "即将上映");
     this.getMovieListData(top250Url, "top250", "豆瓣Top250");
+  },
+
+  onBindFocus: function() {
+    this.setData({
+      searchPanelShow: true,
+      containerShow: false
+    })
+  },
+
+  onBindBlur: function(event) {
+    var text = event.detail.value;
+    var searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + text;
+    this.getMovieListData(searchUrl, "searchResult", "");
+  },
+
+  onCancelImgTap: function() {
+    this.setData({
+      searchPanelShow: false,
+      containerShow: true,
+      searchResult: {}
+    })
   },
 
   onMoreTap: function(event) {
