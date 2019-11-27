@@ -31,7 +31,7 @@ Page({
     for(var idx in moviesDouban.subjects) {
       var subject = moviesDouban.subjects[idx];
       var title = subject.title;
-      if(title >= 6) {
+      if(title.length >= 6) {
         title = title.substring(0, 6) + "...";
       }
       var movie = {
