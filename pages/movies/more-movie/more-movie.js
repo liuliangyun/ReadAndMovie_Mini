@@ -30,7 +30,7 @@ Page({
     util.http(dataUrl, this.processDoubanData);
   },
 
-  onScrollToLower: function() {
+  onReachBottom: function() {
     console.log("加载更多");
     var requestUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
     util.http(requestUrl, this.processDoubanData);
@@ -76,6 +76,7 @@ Page({
       movies: totalMovies
     });
     wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
   },
 
   onReady: function() {
