@@ -28,7 +28,29 @@ function http(url, callBack) {
   })
 }
 
+function convertToCastString(casts) {
+  var castsJoin = "";
+  for(var index in casts) {
+    castsJoin = castsJoin + casts[index].name + " / ";
+  }
+  return castsJoin.substring(0, castsJoin.length - 2);
+}
+
+function convertToCastInfo(casts) {
+  var castsArray = [];
+  for(var index in casts) {
+    var cast = {
+      img: casts[index].avatars ? casts[index].avatars.large : "",
+      name: casts[index].name
+    }
+    castsArray.push(cast);
+  }
+  return castsArray;
+}
+
 module.exports = {
   convertStarsNumberToArray: convertStarsNumberToArray,
-  http: http
+  http: http,
+  convertToCastString: convertToCastString,
+  convertToCastInfo: convertToCastInfo
 }

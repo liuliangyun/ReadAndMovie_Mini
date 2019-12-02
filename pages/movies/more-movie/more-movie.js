@@ -58,7 +58,7 @@ Page({
         stars: util.convertStarsNumberToArray(subject.rating.stars),
         average: subject.rating.average,
         coverageUrl: subject.images.large,
-        moviesId: subject.id
+        movieId: subject.id
       }
       movies.push(movie);
     }
@@ -79,9 +79,17 @@ Page({
     wx.stopPullDownRefresh();
   },
 
+  // 这里只能在onReady生命周期函数中做收到数据后UI元素变化的操作，这是因为onLoad、onShow都是在receiving data之前执行的
   onReady: function() {
     wx.setNavigationBarTitle({
       title: this.data.category
+    })
+  },
+
+  onMovieTap: function(event) {
+    var movieId = event.currentTarget.dataset.movieId;
+    wx.navigateTo({
+      url: "../movie-detail/movie-detail?id=" + movieId
     })
   }
 

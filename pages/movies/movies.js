@@ -83,7 +83,7 @@ Page({
         stars: util.convertStarsNumberToArray(subject.rating.stars),
         average: subject.rating.average,
         coverageUrl: subject.images.large,
-        moviesId: subject.id
+        movieId: subject.id
       }
       movies.push(movie);
     }
@@ -94,6 +94,13 @@ Page({
       movies: movies
     };
     this.setData(tempData);
+  },
+
+  onMovieTap: function(event) {
+    var movieId = event.currentTarget.dataset.movieId;
+    wx.navigateTo({
+      url: "./movie-detail/movie-detail?id=" + movieId
+    })
   }
 
 })
